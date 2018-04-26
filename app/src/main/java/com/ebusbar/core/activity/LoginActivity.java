@@ -13,6 +13,7 @@ import com.ebusbar.core.entity.Login;
 import com.ebusbar.core.fragment.LoginFragment;
 import com.ebusbar.core.presenter.LoginPresenter;
 import com.ebusbar.ecore.utils.ToastUtil;
+import com.socks.library.KLogUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,10 +35,12 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
     public int getLayoutId() {
         return R.layout.activity_main;
     }
+
     @Override
     public LoginContract.Presenter createPresenter() {
         return new LoginPresenter(this);
     }
+
     @Override
     public LoginContract.View createView() {
         return this;
@@ -50,11 +53,26 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                 replace(R.id.frame_lay, new LoginFragment()).
                 commitAllowingStateLoss();
 
+        findViewById(R.id.main_check_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView) findViewById(R.id.main_msg_tv)).setText("");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("type", "yuantong");
+                map.put("postid", "11111111111");
+//                map.put("mobile","18328008870");
+//                map.put("secret","34ba01d602c88790bbe81a7aca8d3a9f");
+//                KLog.e("mobile:  "+"18328008870"+"  secret:   "+"34ba01d602c88790bbe81a7aca8d3a9f");
+                getPresenter().login(map, true, true);
+            }
+        });
+
     }
 
     @Override
     public void result(BaseResponse<List<Login>> data) {
-        main_msg_tv.setText(data.getData().toString());
+        ((TextView) findViewById(R.id.main_msg_tv))
+                .setText(data.getData().toString());
     }
 
     @Override
@@ -76,14 +94,15 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                 break;
             case R.id.main_check_btn:
                 main_msg_tv.setText("");
-                HashMap<String,String> map = new HashMap<>();
-                map.put("type","yuantong");
-                map.put("postid","11111111111");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("type", "yuantong");
+                map.put("postid", "11111111111");
 //                map.put("mobile","18328008870");
 //                map.put("secret","34ba01d602c88790bbe81a7aca8d3a9f");
 //                KLog.e("mobile:  "+"18328008870"+"  secret:   "+"34ba01d602c88790bbe81a7aca8d3a9f");
-                getPresenter().login(map,true,true);
+                getPresenter().login(map, true, true);
                 break;
         }
+        ToastUtil.showLongToast("234123412341234123412341234");
     }
 }
