@@ -107,10 +107,5 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
         ToastUtil.showLongToast("234123412341234123412341234");
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }
