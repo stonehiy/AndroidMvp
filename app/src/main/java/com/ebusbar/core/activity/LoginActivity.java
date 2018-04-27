@@ -1,35 +1,40 @@
 package com.ebusbar.core.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ebusbar.core.R;
-import com.ebusbar.ecore.base.BaseActivity;
-import com.ebusbar.ecore.base.BaseResponse;
 import com.ebusbar.core.contract.LoginContract;
 import com.ebusbar.core.entity.Login;
 import com.ebusbar.core.fragment.LoginFragment;
 import com.ebusbar.core.presenter.LoginPresenter;
+import com.ebusbar.ecore.base.BaseActivity;
+import com.ebusbar.ecore.base.BaseResponse;
 import com.ebusbar.ecore.utils.ToastUtil;
-import com.socks.library.KLogUtil;
 
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
 
 public class LoginActivity extends BaseActivity<LoginContract.View, LoginContract.Presenter> implements LoginContract.View {
 
-    @BindView(R.id.main_msg_tv)
-    TextView main_msg_tv;
+
     @BindView(R.id.main_check_btn)
-    Button main_check_btn;
+    Button mMainCheckBtn;
+    @BindView(R.id.main_msg_tv)
+    TextView mMainMsgTv;
     @BindView(R.id.frame_lay)
-    FrameLayout frame_lay;
+    FrameLayout mFrameLay;
+    @BindView(R.id.activity_main)
+    LinearLayout mActivityMain;
 
     @Override
     public int getLayoutId() {
@@ -53,26 +58,22 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                 replace(R.id.frame_lay, new LoginFragment()).
                 commitAllowingStateLoss();
 
-        findViewById(R.id.main_check_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((TextView) findViewById(R.id.main_msg_tv)).setText("");
-                HashMap<String, String> map = new HashMap<>();
-                map.put("type", "yuantong");
-                map.put("postid", "11111111111");
-//                map.put("mobile","18328008870");
-//                map.put("secret","34ba01d602c88790bbe81a7aca8d3a9f");
-//                KLog.e("mobile:  "+"18328008870"+"  secret:   "+"34ba01d602c88790bbe81a7aca8d3a9f");
-                getPresenter().login(map, true, true);
-            }
-        });
+//        findViewById(R.id.main_check_btn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((TextView) findViewById(R.id.main_msg_tv)).setText("");
+//                HashMap<String, String> map = new HashMap<>();
+//                map.put("type", "yuantong");
+//                map.put("postid", "11111111111");
+//                getPresenter().login(map, true, true);
+//            }
+//        });
 
     }
 
     @Override
     public void result(BaseResponse<List<Login>> data) {
-        ((TextView) findViewById(R.id.main_msg_tv))
-                .setText(data.getData().toString());
+        mMainMsgTv.setText(data.getData().toString());
     }
 
     @Override
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
             case R.id.main_msg_tv:
                 break;
             case R.id.main_check_btn:
-                main_msg_tv.setText("");
+                mMainMsgTv.setText("");
                 HashMap<String, String> map = new HashMap<>();
                 map.put("type", "yuantong");
                 map.put("postid", "11111111111");
@@ -104,5 +105,12 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                 break;
         }
         ToastUtil.showLongToast("234123412341234123412341234");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
