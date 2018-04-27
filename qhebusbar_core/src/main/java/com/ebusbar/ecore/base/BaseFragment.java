@@ -10,8 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 作者：senon on 2017/12/27 15:59
- * 邮箱：a1083911695@163.com
  * 父类->基类->动态指定类型->泛型设计（通过泛型指定动态类型->由子类指定，父类只需要规定范围即可）
  */
 public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V>> extends RxFragment {
