@@ -17,16 +17,11 @@ package com.ebusbar.ecore;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Message;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 
 
-import com.ebusbar.ecore.utils.BaseApplication;
+import com.ebusbar.ecore.base.BaseApplication;
 
 import java.util.Arrays;
 import java.util.Iterator;

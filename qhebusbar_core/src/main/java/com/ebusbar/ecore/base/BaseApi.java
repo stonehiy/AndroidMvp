@@ -2,7 +2,6 @@ package com.ebusbar.ecore.base;
 
 import android.text.TextUtils;
 
-import com.ebusbar.ecore.utils.BaseApplication;
 import com.ebusbar.ecore.utils.NetWorkUtil;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

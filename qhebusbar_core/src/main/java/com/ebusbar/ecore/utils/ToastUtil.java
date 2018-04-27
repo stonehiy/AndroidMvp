@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ebusbar.ecore.R;
+import com.ebusbar.ecore.base.BaseApplication;
 
 
 public class ToastUtil {

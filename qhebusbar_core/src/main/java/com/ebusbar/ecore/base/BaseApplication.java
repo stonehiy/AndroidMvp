@@ -1,11 +1,8 @@
-package com.ebusbar.ecore.utils;
+package com.ebusbar.ecore.base;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 
-import com.ebusbar.ecore.AppManager;
 import com.ebusbar.ecore.delegate.AppDelegate;
 import com.ebusbar.ecore.delegate.AppLifecycles;
 
