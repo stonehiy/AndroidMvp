@@ -41,6 +41,8 @@ import timber.log.Timber;
  */
 public class AppLifecyclesImpl implements AppLifecycles {
 
+    int mCount;
+
     @Override
     public void attachBaseContext(Context base) {
         MultiDex.install(base);  //这里比 onCreate 先执行,常用于 MultiDex 初始化,插件化框架的初始化
@@ -62,6 +64,8 @@ public class AppLifecyclesImpl implements AppLifecycles {
 //                }
 //            });
             ButterKnife.setDebug(true);
+            mCount = mCount + 1;
+            Timber.w("mCount = " + mCount + "");
         }
         //leakCanary内存泄露检查
         RefWatcher refWatcher = BuildConfig.DEBUG ? LeakCanary.install(application) : RefWatcher.DISABLED;

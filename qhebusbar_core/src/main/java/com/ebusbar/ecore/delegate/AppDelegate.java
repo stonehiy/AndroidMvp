@@ -80,9 +80,6 @@ public class AppDelegate implements AppLifecycles {
                 application.registerActivityLifecycleCallbacks(life);
             }
         }
-        for (AppLifecycles lifecycle : mAppLifecycles) {
-            lifecycle.onCreate(application);
-        }
 
 
     }

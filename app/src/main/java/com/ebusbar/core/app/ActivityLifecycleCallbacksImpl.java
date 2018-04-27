@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import timber.log.Timber;
+
 /**
  * ================================================
  * 展示 {@link Application.ActivityLifecycleCallbacks} 的用法
@@ -34,12 +36,12 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        Log.w(activity.getClass().toString(), " - onActivityCreated");
+        Timber.w(activity + " - onActivityCreated");
     }
 
     @Override
     public void onActivityStarted(final Activity activity) {
-        Log.w(activity.getClass().toString(), " - onActivityStarted");
+        Timber.w(activity + " - onActivityStarted");
 //        if (!activity.getIntent().getBooleanExtra("isInitToolbar", false)) {
 //            //由于加强框架的兼容性,故将 setContentView 放到 onActivityCreated 之后,onActivityStarted 之前执行
 //            //而 findViewById 必须在 Activity setContentView() 后才有效,所以将以下代码从之前的 onActivityCreated 中移动到 onActivityStarted 中执行
@@ -72,26 +74,26 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityResumed(Activity activity) {
-        Log.w(activity.getClass().toString(), " - onActivityResumed");
+        Timber.w(activity + " - onActivityResumed");
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        Log.w(activity.getClass().toString(), " - onActivityPaused");
+        Timber.w(activity + " - onActivityPaused");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        Log.w(activity.getClass().toString(), " - onActivityStopped");
+        Timber.w(activity + " - onActivityStopped");
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        Log.w(activity.getClass().toString(), " - onActivitySaveInstanceState");
+        Timber.w(activity + " - onActivitySaveInstanceState");
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        Log.w(activity.getClass().toString(), " - onActivityDestroyed");
+        Timber.w(activity + " - onActivityDestroyed");
     }
 }

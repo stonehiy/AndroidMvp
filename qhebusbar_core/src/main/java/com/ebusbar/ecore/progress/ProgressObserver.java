@@ -9,9 +9,11 @@ import com.ebusbar.ecore.utils.ToastUtil;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
+import timber.log.Timber;
 
 /**
  * 观察者
@@ -26,7 +28,7 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
     public ProgressObserver(Context context, ObserverResponseListener listener, boolean isDialog, boolean cancelable) {
         this.listener = listener;
         this.context = context;
-        if(isDialog){
+        if (isDialog) {
             mProgressDialogHandler = new ProgressDialogHandler(context, this, cancelable);
         }
     }
@@ -61,8 +63,8 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
         dismissProgressDialog();
         Log.e(TAG, "onError: ", e);
         //自定义异常处理
-        if(e instanceof ExceptionHandle.ResponeThrowable){
-            listener.onError((ExceptionHandle.ResponeThrowable)e);
+        if (e instanceof ExceptionHandle.ResponeThrowable) {
+            listener.onError((ExceptionHandle.ResponeThrowable) e);
         } else {
             listener.onError(new ExceptionHandle.ResponeThrowable(e, ExceptionHandle.ERROR.UNKNOWN));
         }
@@ -75,7 +77,7 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
             ToastUtil.showLongToast("连接失败");
         } else if (e instanceof HttpException) {
             ToastUtil.showLongToast("请求超时");
-        }else {
+        } else {
             ToastUtil.showLongToast("请求失败");
         }
     }
@@ -83,12 +85,13 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
     @Override
     public void onComplete() {
         dismissProgressDialog();
-        Log.e(TAG, "onComplete: ");
+        Timber.w(TAG + " - onActivityStarted");
+
     }
 
     @Override
     public void onCancelProgress() {
-        Log.e(TAG, "requestCancel: ");
+        Timber.w(TAG + " - requestCancel");
         //如果处于订阅状态，则取消订阅
         if (!d.isDisposed()) {
             d.dispose();
